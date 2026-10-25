@@ -1,0 +1,772 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101b35">
+<title>Seller Dot | Digital Marketplace</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --navy: #101b35;
+  --blue: #2563eb;
+  --light-blue: #eff6ff;
+  --background: #f4f7fc;
+  --white: #ffffff;
+  --text: #172033;
+  --muted: #68758b;
+  --border: #e2e8f0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--background);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.topbar {
+  background: var(--navy);
+  color: white;
+  padding: 17px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.logo span {
+  color: #60a5fa;
+}
+
+.top-note {
+  font-size: 13px;
+  color: #dbeafe;
+}
+
+.navbar {
+  background: white;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  padding: 15px 5%;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.navbar a {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  color: var(--blue);
+}
+
+.container {
+  width: 90%;
+  max-width: 1150px;
+  margin: auto;
+}
+
+.hero {
+  margin-top: 27px;
+  padding: 43px 7%;
+  color: white;
+  border-radius: 20px;
+  background: linear-gradient(125deg, #101b35, #1d4ed8);
+  overflow: hidden;
+}
+
+.hero-label {
+  display: inline-block;
+  padding: 6px 11px;
+  border-radius: 30px;
+  background: #ffffff20;
+  color: #dbeafe;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.hero h1 {
+  margin: 18px 0 12px;
+  font-size: clamp(36px, 7vw, 57px);
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+}
+
+.hero p {
+  max-width: 550px;
+  margin-bottom: 23px;
+  color: #e2e8f0;
+  font-size: 16px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 9px;
+  background: var(--blue);
+  color: white;
+  font-weight: bold;
+}
+
+.btn-white {
+  background: white;
+  color: var(--navy);
+}
+
+.btn:hover {
+  opacity: .88;
+}
+
+.search-row {
+  display: flex;
+  gap: 10px;
+  margin: 25px 0;
+}
+
+.search-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 14px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+}
+
+.search-row input:focus {
+  border-color: var(--blue);
+}
+
+.section {
+  padding: 15px 0 28px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.section-heading h2 {
+  font-size: 24px;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 13px;
+  margin-top: 18px;
+}
+
+.category {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 18px 8px;
+  color: var(--text);
+  font-weight: bold;
+}
+
+.category .emoji {
+  display: block;
+  font-size: 29px;
+  margin-bottom: 8px;
+}
+
+.category.active,
+.category:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  background: var(--light-blue);
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.product-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform .2s;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+}
+
+.product-cover {
+  min-height: 165px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+  text-align: center;
+  color: white;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.product-cover small {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 1px;
+  margin-top: 10px;
+}
+
+.cover-blue {
+  background: linear-gradient(135deg, #1d4ed8, #60a5fa);
+}
+
+.cover-purple {
+  background: linear-gradient(135deg, #5b21b6, #c084fc);
+}
+
+.cover-green {
+  background: linear-gradient(135deg, #047857, #34d399);
+}
+
+.cover-orange {
+  background: linear-gradient(135deg, #c2410c, #fb923c);
+}
+
+.cover-dark {
+  background: linear-gradient(135deg, #111827, #475569);
+}
+
+.cover-pink {
+  background: linear-gradient(135deg, #9d174d, #f472b6);
+}
+
+.product-info {
+  padding: 15px;
+}
+
+.tag {
+  display: inline-block;
+  color: #1d4ed8;
+  background: #eff6ff;
+  padding: 5px 9px;
+  border-radius: 20px;
+  font-size: 11px;
+}
+
+.product-info h3 {
+  margin: 10px 0 6px;
+  font-size: 17px;
+}
+
+.product-info p {
+  font-size: 13px;
+  color: var(--muted);
+  min-height: 40px;
+}
+
+.product-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.price {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.add-btn {
+  background: var(--blue);
+  color: white;
+  border: none;
+  padding: 9px 11px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.empty {
+  grid-column: 1 / -1;
+  padding: 35px 15px;
+  text-align: center;
+  background: white;
+  border-radius: 12px;
+}
+
+.seller-banner {
+  margin: 20px 0 35px;
+  padding: 27px;
+  background: #e4edff;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.seller-banner h2 {
+  margin-bottom: 7px;
+}
+
+.seller-banner p {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.cart-box {
+  background: white;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-top: 15px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.remove-btn {
+  border: none;
+  background: #fee2e2;
+  color: #b91c1c;
+  border-radius: 6px;
+  padding: 6px 9px;
+}
+
+.cart-total {
+  font-size: 19px;
+  font-weight: bold;
+  margin: 16px 0;
+}
+
+footer {
+  margin-top: 35px;
+  padding: 30px 5%;
+  text-align: center;
+  background: var(--navy);
+  color: white;
+}
+
+footer p {
+  color: #cbd5e1;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+@media (max-width: 700px) {
+  .products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 11px;
+  }
+
+  .categories {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero {
+    padding: 30px 22px;
+  }
+
+  .product-cover {
+    min-height: 130px;
+    font-size: 19px;
+  }
+
+  .product-info {
+    padding: 11px;
+  }
+
+  .product-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 360px) {
+  .products {
+    grid-template-columns: 1fr;
+  }
+
+  .search-row .btn {
+    padding: 10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <a href="#" class="logo">Seller<span>Dot.</span></a>
+  <div class="top-note">Nigeria's Digital Marketplace 🇳🇬</div>
+</header>
+
+<nav class="navbar">
+  <a href="#">Home</a>
+  <a href="#categories">Categories</a>
+  <a href="#products">Products</a>
+  <a href="#sell">Become a Seller</a>
+  <a href="#cart">Cart (<span id="cartCount">0</span>)</a>
+</nav>
+
+<main class="container">
+
+  <section class="hero">
+    <span class="hero-label">YOUR DIGITAL MARKETPLACE</span>
+    <h1>Discover.<br>Buy. Grow.</h1>
+    <p>
+      Discover ebooks, learning resources and digital tools
+      to help you learn new skills and take your next step.
+    </p>
+    <a href="#products" class="btn btn-white">Explore Products →</a>
+  </section>
+
+  <form class="search-row" id="searchForm">
+    <input id="searchInput" type="search"
+      placeholder="Search ebooks, courses and templates..."
+      aria-label="Search products">
+    <button class="btn" type="submit">Search</button>
+  </form>
+
+  <section class="section" id="categories">
+    <div class="section-heading">
+      <div>
+        <h2>Browse Categories</h2>
+        <p class="muted">Find the resources you need.</p>
+      </div>
+    </div>
+
+    <div class="categories">
+      <button class="category active" data-category="All">
+        <span class="emoji">🛍️</span>All Products
+      </button>
+      <button class="category" data-category="Ebooks">
+        <span class="emoji">📚</span>Ebooks
+      </button>
+      <button class="category" data-category="Education">
+        <span class="emoji">🎓</span>Education
+      </button>
+      <button class="category" data-category="Templates">
+        <span class="emoji">🗂️</span>Templates
+      </button>
+    </div>
+  </section>
+
+  <section class="section" id="products">
+    <div class="section-heading">
+      <div>
+        <h2>Explore Products</h2>
+        <p class="muted" id="resultCount">Discover digital resources.</p>
+      </div>
+    </div>
+
+    <div class="products" id="productGrid"></div>
+  </section>
+
+  <section class="seller-banner" id="sell">
+    <div>
+      <h2>Start selling digital products</h2>
+      <p>Share your ebooks, templates and learning resources.</p>
+      <p>Seller registration is not connected yet.</p>
+    </div>
+    <button class="btn" id="sellerButton">Become a Seller</button>
+  </section>
+
+  <section class="section" id="cart">
+    <h2>Your Shopping Cart</h2>
+    <div class="cart-box">
+      <div id="cartItems">Your cart is empty.</div>
+      <div id="cartTotal" class="cart-total"></div>
+      <button class="btn" id="clearCart">Clear Cart</button>
+      <button class="btn" id="checkoutButton">Checkout</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <a href="#" class="logo">Seller<span>Dot.</span></a>
+  <p>Discover useful digital products and resources.</p>
+  <p>© <span id="year"></span> Seller Dot. All rights reserved.</p>
+</footer>
+
+<script>
+"use strict";
+
+var products = [
+  {
+    id: 1,
+    name: "AI Tools for Beginners",
+    category: "Ebooks",
+    price: 3500,
+    description: "Discover practical ways to use AI tools.",
+    cover: "cover-blue",
+    emoji: "🤖"
+  },
+  {
+    id: 2,
+    name: "Digital Marketing Basics",
+    category: "Education",
+    price: 5000,
+    description: "Learn the basics of promoting products online.",
+    cover: "cover-purple",
+    emoji: "📈"
+  },
+  {
+    id: 3,
+    name: "Social Media Templates",
+    category: "Templates",
+    price: 2500,
+    description: "Organise your social media content ideas.",
+    cover: "cover-green",
+    emoji: "🎨"
+  },
+  {
+    id: 4,
+    name: "Start an Online Business",
+    category: "Ebooks",
+    price: 4000,
+    description: "Explore the basics of starting an online business.",
+    cover: "cover-orange",
+    emoji: "💡"
+  },
+  {
+    id: 5,
+    name: "CV and Job Application Guide",
+    category: "Education",
+    price: 3000,
+    description: "Improve your CV and job application preparation.",
+    cover: "cover-dark",
+    emoji: "💼"
+  },
+  {
+    id: 6,
+    name: "Business Planner Templates",
+    category: "Templates",
+    price: 2000,
+    description: "Plan your goals, tasks and business ideas.",
+    cover: "cover-pink",
+    emoji: "🗓️"
+  }
+];
+
+var selectedCategory = "All";
+var cart = [];
+
+var grid = document.getElementById("productGrid");
+var searchInput = document.getElementById("searchInput");
+
+function formatNaira(value) {
+  return "₦" + Number(value).toLocaleString("en-NG");
+}
+
+function renderProducts() {
+  var query = searchInput.value.toLowerCase().trim();
+  var filtered = [];
+
+  products.forEach(function(product) {
+    var categoryMatch =
+      selectedCategory === "All" ||
+      product.category === selectedCategory;
+
+    var text = (
+      product.name + " " +
+      product.category + " " +
+      product.description
+    ).toLowerCase();
+
+    if (categoryMatch && text.indexOf(query) !== -1) {
+      filtered.push(product);
+    }
+  });
+
+  document.getElementById("resultCount").textContent =
+    filtered.length + " product(s) found";
+
+  if (filtered.length === 0) {
+    grid.innerHTML =
+      '<div class="empty">No products found. Try another search.</div>';
+    return;
+  }
+
+  var html = "";
+
+  filtered.forEach(function(product) {
+    html +=
+      '<article class="product-card">' +
+        '<div class="product-cover ' + product.cover + '">' +
+          '<div>' +
+            product.emoji + '<br>' +
+            product.name +
+            '<small>SELLER DOT RESOURCE</small>' +
+          '</div>' +
+        '</div>' +
+        '<div class="product-info">' +
+          '<span class="tag">' + product.category + '</span>' +
+          '<h3>' + product.name + '</h3>' +
+          '<p>' + product.description + '</p>' +
+          '<div class="product-bottom">' +
+            '<span class="price">' + formatNaira(product.price) + '</span>' +
+            '<button class="add-btn" data-add="' + product.id + '">' +
+              'Add to Cart' +
+            '</button>' +
+          '</div>' +
+        '</div>' +
+      '</article>';
+  });
+
+  grid.innerHTML = html;
+}
+
+function renderCart() {
+  var items = document.getElementById("cartItems");
+  var total = 0;
+  var html = "";
+
+  document.getElementById("cartCount").textContent = cart.length;
+
+  if (cart.length === 0) {
+    items.textContent = "Your cart is empty.";
+    document.getElementById("cartTotal").textContent = "";
+    return;
+  }
+
+  cart.forEach(function(id, index) {
+    var product = products.find(function(item) {
+      return item.id === id;
+    });
+
+    if (product) {
+      total += product.price;
+      html +=
+        '<div class="cart-item">' +
+          '<span>' + product.name + ' — ' +
+          formatNaira(product.price) + '</span>' +
+          '<button class="remove-btn" data-remove="' +
+          index + '">Remove</button>' +
+        '</div>';
+    }
+  });
+
+  items.innerHTML = html;
+  document.getElementById("cartTotal").textContent =
+    "Total: " + formatNaira(total);
+}
+
+grid.addEventListener("click", function(event) {
+  var button = event.target.closest("[data-add]");
+
+  if (!button) {
+    return;
+  }
+
+  cart.push(Number(button.getAttribute("data-add")));
+  renderCart();
+
+  button.textContent = "Added ✓";
+});
+
+document.getElementById("cartItems").addEventListener("click", function(event) {
+  var button = event.target.closest("[data-remove]");
+
+  if (!button) {
+    return;
+  }
+
+  cart.splice(Number(button.getAttribute("data-remove")), 1);
+  renderCart();
+});
+
+document.getElementById("clearCart").addEventListener("click", function() {
+  cart = [];
+  renderCart();
+});
+
+document.getElementById("searchForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+  renderProducts();
+  document.getElementById("products").scrollIntoView();
+});
+
+searchInput.addEventListener("input", renderProducts);
+
+document.querySelectorAll("[data-category]").forEach(function(button) {
+  button.addEventListener("click", function() {
+    selectedCategory = button.getAttribute("data-category");
+
+    document.querySelectorAll("[data-category]").forEach(function(item) {
+      item.classList.remove("active");
+    });
+
+    button.classList.add("active");
+    renderProducts();
+  });
+});
+
+document.getElementById("checkoutButton").addEventListener("click", function() {
+  alert("Demo only: checkout and payments are not connected yet.");
+});
+
+document.getElementById("sellerButton").addEventListener("click", function() {
+  alert("Seller registration is not connected yet.");
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+renderProducts();
+renderCart();
+</script>
+
+</body>
+  </html>
+  
